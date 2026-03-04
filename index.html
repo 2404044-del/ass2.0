@@ -8,38 +8,40 @@
   <link rel="stylesheet" href="print.css" media="print" />
 </head>
 <body>
-
   <div class="wrap">
-    <header class="top">
+    <header class="topbar">
       <div class="brand">
         <div class="logoText">SUNRISE VALLEY</div>
-        <div class="logoSub">HIGH SCHOOL • Student Registration</div>
+        <div class="logoSub">HIGH SCHOOL</div>
       </div>
 
-      <div class="headerRight">
+      <div class="topActions">
         <button id="printReceiptBtn" class="btn">Print Receipt</button>
       </div>
     </header>
 
-    <main class="grid">
-      
+    <main class="layout">
+      <!-- Registration Form -->
       <section class="card">
-        <h2>Register Student (POST)</h2>
+        <div class="cardHead">
+          <h1>Student Registration</h1>
+          <p>Fill the form to register a student.</p>
+        </div>
 
-        <form id="studentForm" class="form">
+        <form id="studentForm" class="form" autocomplete="off">
           <div class="fields">
             <label>
-              Admission No.
+              Admission No. *
               <input id="admNo" type="text" placeholder="e.g. SVHS/2026/0142" required />
             </label>
 
             <label>
-              Full Name
+              Full Name *
               <input id="fullName" type="text" placeholder="e.g. Achieng Otieno" required />
             </label>
 
             <label>
-              Gender
+              Gender *
               <select id="gender" required>
                 <option value="">Select…</option>
                 <option>Male</option>
@@ -49,12 +51,12 @@
             </label>
 
             <label>
-              Date of Birth
+              Date of Birth *
               <input id="dob" type="date" required />
             </label>
 
             <label>
-              Class / Grade
+              Class / Grade *
               <select id="grade" required>
                 <option value="">Select…</option>
                 <option>Form 1</option>
@@ -65,7 +67,7 @@
             </label>
 
             <label>
-              Year of Admission
+              Year of Admission *
               <input id="year" type="number" min="2000" max="2100" placeholder="e.g. 2026" required />
             </label>
 
@@ -81,29 +83,31 @@
 
             <label class="wide">
               Notes (optional)
-              <input id="notes" type="text" placeholder="Any extra info (medical, transfer, etc.)" />
+              <input id="notes" type="text" placeholder="Any extra information" />
             </label>
           </div>
 
           <div class="actions">
             <button type="submit" class="btn primary">Save Student</button>
-            <button type="button" id="clearAll" class="btn danger">Delete ALL Records</button>
+            <button type="button" id="clearAll" class="btn danger">Clear All Records</button>
           </div>
         </form>
 
-        <p class="hint">
-          Works on GitHub Pages. “Backend” is <b>backend.js</b> (storage + API).
-        </p>
+        <div class="notice">
+          <b>Tip:</b> Click a student in the list to select them for receipt printing.
+        </div>
       </section>
 
-      
+      <!-- Students List -->
       <section class="card">
-        <div class="row">
-          <h2>Students (GET)</h2>
+        <div class="listHead">
+          <div>
+            <h2>Registered Students</h2>
+            <p class="muted">Search, view, and delete records.</p>
+          </div>
 
-          <div class="tools">
-            <input id="search" type="search" placeholder="Search name / adm no / phone..." />
-            <button id="exportBtn" class="btn">Export JSON</button>
+          <div class="searchBox">
+            <input id="search" type="search" placeholder="Search by name / admission / phone..." />
           </div>
         </div>
 
@@ -119,64 +123,63 @@
                 <th>Year</th>
                 <th>Guardian</th>
                 <th>Phone</th>
-                <th>Action (DELETE)</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody id="rows"></tbody>
           </table>
         </div>
-
-        <p class="hint">Click a student row to set them as the <b>receipt</b> student.</p>
       </section>
     </main>
 
-    <section id="receipt" class="receipt">
-      <div class="receiptHeader">
-        <div>
-          <div class="receiptLogo">SUNRISE VALLEY</div>
-          <div class="receiptSub">HIGH SCHOOL</div>
-        </div>
-        <div class="receiptMeta">
-          <div><b>Receipt No:</b> <span id="receiptNo">—</span></div>
-          <div><b>Date:</b> <span id="receiptDate">—</span></div>
-        </div>
-      </div>
-
-      <hr />
-
-      <h3>Student Registration Receipt</h3>
-
-      <div class="receiptGrid">
-        <div><b>Admission No:</b> <span id="rAdm">—</span></div>
-        <div><b>Full Name:</b> <span id="rName">—</span></div>
-        <div><b>Gender:</b> <span id="rGender">—</span></div>
-        <div><b>Date of Birth:</b> <span id="rDob">—</span></div>
-        <div><b>Class:</b> <span id="rGrade">—</span></div>
-        <div><b>Year of Admission:</b> <span id="rYear">—</span></div>
-        <div><b>Guardian:</b> <span id="rGuardian">—</span></div>
-        <div><b>Guardian Phone:</b> <span id="rGPhone">—</span></div>
-        <div class="wide"><b>Notes:</b> <span id="rNotes">—</span></div>
-      </div>
-
-      <div class="signRow">
-        <div class="signBox">
-          <div class="line"></div>
-          <div>Registrar Signature</div>
-        </div>
-        <div class="signBox">
-          <div class="line"></div>
-          <div>School Stamp</div>
-        </div>
-      </div>
-
-      <p class="receiptFoot">This receipt confirms successful student registration.</p>
-    </section>
-
-    <footer class="foot">
-      <span>Sunrise Valley High School</span>
-      <span class="muted">• Simple Student Registration • GitHub Pages</span>
+    <footer class="footer">
+      <span>© <span id="yearNow"></span> Sunrise Valley High School</span>
+      <span class="muted">Student Registration System</span>
     </footer>
   </div>
+
+  <!-- Receipt (only appears when printing) -->
+  <section id="receipt" class="receipt">
+    <div class="receiptHeader">
+      <div>
+        <div class="receiptLogo">SUNRISE VALLEY</div>
+        <div class="receiptSub">HIGH SCHOOL</div>
+        <div class="receiptTiny">Student Registration Receipt</div>
+      </div>
+      <div class="receiptMeta">
+        <div><b>Receipt No:</b> <span id="receiptNo">—</span></div>
+        <div><b>Date:</b> <span id="receiptDate">—</span></div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="receiptGrid">
+      <div><b>Admission No:</b> <span id="rAdm">—</span></div>
+      <div><b>Full Name:</b> <span id="rName">—</span></div>
+      <div><b>Gender:</b> <span id="rGender">—</span></div>
+      <div><b>Date of Birth:</b> <span id="rDob">—</span></div>
+      <div><b>Class:</b> <span id="rGrade">—</span></div>
+      <div><b>Year of Admission:</b> <span id="rYear">—</span></div>
+      <div><b>Guardian:</b> <span id="rGuardian">—</span></div>
+      <div><b>Guardian Phone:</b> <span id="rGPhone">—</span></div>
+      <div class="wide"><b>Notes:</b> <span id="rNotes">—</span></div>
+    </div>
+
+    <div class="signRow">
+      <div class="signBox">
+        <div class="line"></div>
+        <div>Registrar Signature</div>
+      </div>
+      <div class="signBox">
+        <div class="line"></div>
+        <div>School Stamp</div>
+      </div>
+    </div>
+
+    <div class="receiptFoot">This receipt confirms successful student registration.</div>
+  </section>
+
   <script src="backend.js"></script>
   <script src="app.js"></script>
 </body>
