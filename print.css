@@ -1,0 +1,62 @@
+@page {
+  size: A4;
+  margin: 16mm;
+}
+
+body { background: white !important; color: black !important; }
+.wrap, .card, .top, .foot, main { display: none !important; }
+
+
+#receipt {
+  display: block !important;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+.receiptHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.receiptLogo {
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 22px;
+}
+.receiptSub {
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.receiptMeta {
+  font-size: 12px;
+  text-align: right;
+}
+
+h3 { margin: 14px 0 8px; }
+
+.receiptGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  font-size: 12.5px;
+}
+.receiptGrid .wide { grid-column: 1 / -1; }
+
+.signRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 26px;
+  gap: 18px;
+}
+.signBox { width: 45%; font-size: 12px; text-align: center; }
+.line { border-bottom: 1px solid #000; height: 24px; margin-bottom: 6px; }
+
+.receiptFoot {
+  margin-top: 16px;
+  font-size: 12px;
+  text-align: center;
+}
